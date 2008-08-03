@@ -4,8 +4,8 @@ module ActionView
       
       # Creates a script tag which loads the correct Javascript file (if one exists) according to the Rails view template conventions
       # For example if you're on the users controllers show action, it tries to load app/views/users/show.js.erb
-      def js_erb_auto_include_tag
-        file = File.join(RAILS_ROOT, "app", "views", controller.controller_name, "#{controller.action_name}.js.erb")
+      def js_erb_auto_include_tag(namespace = "")
+        file = File.join(RAILS_ROOT, "app", "views", namespace,controller.controller_name, "#{controller.action_name}.js.erb")
         if File.exist?(file)
         	content_tag 'script', '', :src => @js_erb_auto_include_url, :type => 'text/javascript'    
         end
